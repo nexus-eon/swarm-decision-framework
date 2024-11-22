@@ -1,0 +1,70 @@
+{
+    "title": "Office Space Optimization",
+    "created_at": "2024-11-22T20:11:58.433384",
+    "situation": "Our company has grown from 50 to 100 employees in the last year, and our current office space is becoming cramped. This is affecting productivity and employee satisfaction.",
+    "problem_definition": "The current office space is insufficient for our growing team, leading to overcrowding and reduced productivity.",
+    "objectives": [
+        "Accommodate all 100 employees comfortably",
+        "Maintain or improve productivity",
+        "Stay within budget constraints",
+        "Minimize disruption to ongoing operations",
+        "Create a pleasant work environment"
+    ],
+    "diagnosis": "Root causes:\n1. Rapid company growth without space planning\n2. Inefficient use of current space\n3. Outdated office layout not designed for current work patterns",
+    "alternatives": [
+        {
+            "description": "Relocate to a larger office",
+            "pros": [
+                "More space",
+                "Modern facilities",
+                "Fresh start"
+            ],
+            "cons": [
+                "Expensive",
+                "Disruptive",
+                "New commute for employees"
+            ],
+            "score": 0.0
+        },
+        {
+            "description": "Redesign current space",
+            "pros": [
+                "Less expensive",
+                "Familiar location",
+                "Minimal disruption"
+            ],
+            "cons": [
+                "Limited space optimization",
+                "Construction noise"
+            ],
+            "score": 1.0
+        },
+        {
+            "description": "Hybrid work model",
+            "pros": [
+                "Cost-effective",
+                "Flexible",
+                "Modern approach"
+            ],
+            "cons": [
+                "Culture impact",
+                "Communication challenges"
+            ],
+            "score": 1.0
+        }
+    ],
+    "chosen_alternative": {
+        "description": "Redesign current space",
+        "pros": [
+            "Less expensive",
+            "Familiar location",
+            "Minimal disruption"
+        ],
+        "cons": [
+            "Limited space optimization",
+            "Construction noise"
+        ],
+        "score": 1.0
+    },
+    "implementation_notes": "Implementation Plan:\n1. Announce hybrid work model to employees\n2. Set up team rotations\n3. Upgrade conference rooms for better virtual collaboration\n4. Create hot-desking system\n5. Review and adjust after 3 months"
+}

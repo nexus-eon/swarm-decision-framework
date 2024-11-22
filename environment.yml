@@ -1,0 +1,84 @@
+# Decision Framework Development Environment
+# Purpose: AI-enhanced decision-making and problem-solving framework
+# Maintainer: Nexus Team
+# Repository: https://github.com/nexus/decision-framework
+# License: MIT
+# Python Version: 3.13 (Latest stable release)
+# Last Updated: 2024-10-22
+# Minimum conda version: 23.11.0
+
+name: decision-framework-dev
+
+variables:
+  PYTHONPATH: ${CONDA_PREFIX}/lib/python3.13/site-packages
+  PYTHONUNBUFFERED: 1
+  PYTHONDONTWRITEBYTECODE: 1
+
+channels:
+  - conda-forge  # Primary channel for most packages
+  - defaults    # Fallback channel for compatibility
+
+platforms:
+  - linux-64    # Primary development platform
+  - osx-64      # Supported for macOS developers
+  - win-64      # Supported for Windows developers
+
+# Core dependencies for the decision framework
+dependencies:
+  # Base Python environment
+  - python=3.13
+  
+  # Development tools
+  - ipython=8.18.1          # Enhanced interactive Python shell
+  - jupyter=1.0.0           # Notebook interface
+  - black=24.1.1            # Code formatter
+  - flake8=7.0.0           # Linter
+  - mypy=1.8.0             # Static type checker
+  - pytest=8.0.0           # Testing framework
+  - pytest-cov=4.1.0       # Coverage reporting
+  - pre-commit=3.6.0       # Git hooks manager
+
+  # Documentation generation
+  - sphinx=7.2.0                    # Core documentation generator
+  - sphinx-rtd-theme=1.1.1         # Read The Docs theme
+  - recommonmark=0.7.1             # Markdown support
+  - pandoc=3.1.4                   # Universal document converter
+  
+  # Package management
+  - pip=23.3.1                     # Package installer
+  - conda-lock=2.5.1              # Lock file generator
+  - conda-verify=3.3.0            # Environment verification
+  
+  # Security
+  - safety=2.3.5                  # Dependency security checker
+  - bandit=1.7.7                  # Security linter
+
+  # Additional documentation tools via pip
+  - pip:
+    # Auto-rebuilding documentation
+    - sphinx-autobuild==0.7.0      # Live preview server
+    
+    # Documentation quality and conversion
+    - rstcheck==5.0.0              # RST syntax checker
+    - m2r2==0.3.3.post2            # Enhanced Markdown to RST converter
+    
+    # Documentation enhancements
+    - sphinx-markdown-tables==0.0.17  # Table support in Markdown
+    - sphinx-copybutton==0.5.2       # Copy button for code blocks
+    
+    # Type stubs for better type checking
+    - types-all==1.0.0              # Type stubs for popular packages
+
+# Development workflow commands (for reference):
+# - Initial setup:    conda env create -f environment.yml
+# - Update env:       conda env update -f environment.yml --prune
+# - Export:          conda env export > environment.yml
+# - Lock deps:       conda-lock -f environment.yml -p linux-64 -p osx-64 -p win-64
+# - Verify:          conda-verify environment.yml
+
+# Notes:
+# 1. Use conda-lock to generate platform-specific lock files for reproducible builds
+# 2. Run security checks periodically: safety check and bandit
+# 3. Keep dependencies updated using: conda update --all
+# 4. Pre-commit hooks will enforce code quality standards
+# 5. Type checking is enforced through mypy and type stubs
