@@ -3,9 +3,9 @@ AI-Enhanced Decision Framework
 =================================
 
 :Author: Decision Framework Team
-:Version: 1.1
+:Version: 2.0
 :Purpose: Document project organization and file structure
-:AI-Compatibility: Optimized for Cascade/Claude 3.5
+:AI-Compatibility: Optimized for OpenAI Swarm
 
 Project Layout
 ============
@@ -14,63 +14,87 @@ Project Layout
 
    expermient-01/
    ├── docs/
-   │   ├── archive/
-   │   │   ├── findings_archive.rst     # Historical development findings
-   │   │   └── findings_v1.1_implemented.rst  # Implemented v1.1 features
-   │   ├── markdown_to_rst_roadmap.rst  # Documentation conversion plan
-   │   └── swarm_integration_plan.rst   # AI integration strategy
+   │   ├── api/
+   │   │   ├── swarm_api.rst           # OpenAI Swarm API documentation
+   │   │   └── integration.rst         # Integration guidelines
+   │   ├── architecture/
+   │   │   ├── swarm_design.rst       # Swarm architecture design
+   │   │   └── system_overview.rst     # System architecture overview
+   │   └── examples/
+   │       └── swarm_examples.rst      # Swarm usage examples
    ├── src/
    │   └── decision_framework/
-   │       ├── __init__.py              # Package initialization
-   │       └── problem_solving_cycle.py  # Core implementation
+   │       ├── __init__.py             # Package initialization
+   │       ├── swarm/
+   │       │   ├── __init__.py         # Swarm package initialization
+   │       │   ├── agents.py           # Swarm agent definitions
+   │       │   ├── coordinator.py      # Swarm coordination logic
+   │       │   └── policies.py         # Swarm behavior policies
+   │       ├── core/
+   │       │   ├── __init__.py         # Core package initialization
+   │       │   ├── problem.py          # Problem definition
+   │       │   └── solution.py         # Solution processing
+   │       └── utils/
+   │           ├── __init__.py         # Utils package initialization
+   │           ├── config.py           # Configuration management
+   │           └── logging.py          # Logging utilities
    ├── tests/
-   │   ├── __init__.py                  # Test package initialization
-   │   └── test_problem_solving_cycle.py # Framework test suite
-   ├── environment.yml                   # Conda environment specification
-   ├── example_usage.py                  # Framework usage examples
-   ├── LICENSE                          # MIT License
-   ├── office_space_problem.json        # Example problem definition
-   ├── README.rst                       # Project documentation
-   └── setup.py                         # Package configuration
+   │   ├── __init__.py                # Test package initialization
+   │   ├── test_swarm/                # Swarm-related tests
+   │   │   ├── __init__.py
+   │   │   ├── test_agents.py
+   │   │   └── test_coordinator.py
+   │   └── test_core/                 # Core functionality tests
+   │       ├── __init__.py
+   │       ├── test_problem.py
+   │       └── test_solution.py
+   ├── examples/
+   │   ├── basic_usage.py             # Basic framework usage
+   │   └── swarm_examples/            # Swarm-specific examples
+   │       ├── collaborative_solving.py
+   │       └── multi_agent_decision.py
+   ├── environment.yml                # Conda environment specification
+   ├── pyproject.toml                 # Project configuration (replaces setup.py)
+   ├── LICENSE                        # MIT License
+   └── README.rst                     # Project documentation
 
 Directory Contents
 ================
 
 Source Code (``src/decision_framework/``)
 -------------------------------------
-* ``problem_solving_cycle.py``: Core implementation with enhanced type safety and AI capabilities
-* ``__init__.py``: Package exports and version information
+* ``swarm/``: OpenAI Swarm Integration
+  - ``agents.py``: Individual swarm agent implementations
+  - ``coordinator.py``: Swarm coordination and orchestration
+  - ``policies.py``: Swarm behavior and decision policies
+
+* ``core/``: Core Framework Components
+  - ``problem.py``: Problem definition and analysis
+  - ``solution.py``: Solution generation and evaluation
+
+* ``utils/``: Utility Functions
+  - ``config.py``: Configuration management
+  - ``logging.py``: Logging and monitoring
 
 Documentation (``docs/``)
 ----------------------
-* ``archive/``: Historical documentation and implemented features
-  - ``findings_archive.rst``: Original development findings
-  - ``findings_v1.1_implemented.rst``: Documentation of v1.1 features
-* ``markdown_to_rst_roadmap.rst``: Plan for documentation format standardization
-* ``swarm_integration_plan.rst``: Strategy for AI/ML integration
+* ``api/``: API Documentation
+  - ``swarm_api.rst``: OpenAI Swarm API reference
+  - ``integration.rst``: Integration guidelines
+
+* ``architecture/``: System Design
+  - ``swarm_design.rst``: Detailed swarm architecture
+  - ``system_overview.rst``: High-level system design
+
+* ``examples/``: Usage Examples
+  - ``swarm_examples.rst``: Swarm implementation examples
 
 Tests (``tests/``)
 ---------------
-* ``test_problem_solving_cycle.py``: Comprehensive test suite including:
-  - Unit tests for core functionality
-  - Integration tests for AI features
-  - Performance benchmarks
-  - Type safety verification
+* ``test_swarm/``: Swarm functionality tests
+* ``test_core/``: Core framework tests
 
-Configuration Files
-----------------
-* ``environment.yml``: Conda environment with all dependencies
-* ``setup.py``: Package installation and metadata
-* ``LICENSE``: MIT License terms
-
-Example Files
------------
-* ``example_usage.py``: Demonstrates framework usage patterns
-* ``office_space_problem.json``: Sample problem definition
-
-Development Tools
---------------
-* Mypy for static type checking
-* Pytest for testing
-* Black for code formatting
-* Flake8 for linting
+Examples (``examples/``)
+--------------------
+* ``basic_usage.py``: Basic framework usage examples
+* ``swarm_examples/``: Advanced swarm-specific examples
