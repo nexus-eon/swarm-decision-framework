@@ -1,9 +1,9 @@
-=========================
-Swarm Integration Plan
-=========================
+==========================
+Swarm Integration Plan v2
+==========================
 
 :Author: Decision Framework Team
-:Version: 1.0
+:Version: 2.0
 :Purpose: Define integration strategy for OpenAI Swarm
 :AI-Compatibility: Optimized for Cascade/Claude 3.5
 
@@ -11,209 +11,146 @@ Swarm Integration Plan
    :depth: 3
    :local:
 
-Documentation Assessment
-======================
-
-Available Swarm Documentation
----------------------------
+Implementation Status
+===================
 
 Core Components
-~~~~~~~~~~~~~~
-* Agent abstraction
-* Handoff mechanisms
-* Function calling
-* Context variable management
-* Streaming capabilities
+-------------
+ Agent Abstraction Layer (``swarm_agents.py``)
+  * Base DecisionFrameworkAgent class
+  * Specialized agents for each step
+  * Cognitive monitoring capabilities
 
-Key Examples
-~~~~~~~~~~~
-* Basic agent setup (``examples/basic``)
-* Triage system (``examples/triage_agent``)
-* Multi-agent coordination (``examples/airline``)
-* Support system (``examples/support_bot``)
+ Coordination Layer (``swarm_coordinator.py``)
+  * Agent network management
+  * State transitions
+  * Context variable handling
 
-Documentation Gaps
-~~~~~~~~~~~~~~~~
-* Limited cognitive state management examples
-* No direct examples for decision-making workflows
-* Missing patterns for evidence-based systems
-* Limited documentation on agent state persistence
-
-Technical Documentation
-=====================
+Pending Components
+----------------
+* Alternative Generation Agent
+* Implementation Agent
+* Evidence Collection System
+* Testing Framework
 
 Architecture Overview
 -------------------
 
+Agent Network
+~~~~~~~~~~~~
+
 .. code-block:: mermaid
 
    graph TD
-       A[Problem Solving Cycle] --> B[Agent Network]
-       B --> C1[Problem Identification Agent]
-       B --> C2[Criteria Evaluation Agent]
-       B --> C3[Alternative Generation Agent]
-       B --> C4[Implementation Agent]
-       B --> C5[Cognitive Monitor Agent]
-       D[Swarm Client] --> E[OpenAI API]
-       F[Evidence System] --> G[Information Sources]
+       A[SwarmCoordinator] --> B[Agent Network]
+       B --> C1[ProblemIdentifierAgent]
+       B --> C2[CriteriaEvaluatorAgent]
+       B --> C3[CognitiveMonitorAgent]
+       D[Context Variables] --> E[State Management]
+       F[Evidence System] --> G[Agent Decisions]
+
+State Management
+~~~~~~~~~~~~~~
+* Context variables track:
+  - Current decision cycle step
+  - Problem analysis results
+  - Criteria evaluations
+  - Cognitive state metrics
+  - Evidence collection status
+
+Agent Communication
+~~~~~~~~~~~~~~~~~
+* Handoff mechanisms implemented
+* Context preservation during transitions
+* Evidence-based decision tracking
+* Cognitive state monitoring
 
 Integration Patterns
 ------------------
 
-Agent-Step Mapping
-~~~~~~~~~~~~~~~~~
-* Each step in 8-step cycle maps to specialized agent
-* Agents maintain focused responsibilities
-* Clear handoff protocols between steps
-
-State Management
-~~~~~~~~~~~~~~
-* Context variables for step tracking
-* Evidence and criteria state preservation
-* Cognitive state monitoring
-
-Data Flow
-~~~~~~~~
-
-.. code-block:: mermaid
-
-   sequenceDiagram
-       participant User
-       participant Framework
-       participant Agent
-       participant Evidence
-       participant Cognitive
-
-Agile Development Framework
-=========================
-
-SCRUMBAN Board Structure
-----------------------
-
-.. _backlog:
-
-Backlog
-~~~~~~~
-* Initial setup tasks
-* Core agent implementation
-* Integration components
-* Testing framework
-
-Sprint Planning
-~~~~~~~~~~~~~
-* 2-week sprints
-* Daily standups
-* End-of-sprint reviews
-* Retrospectives
-
-Priority Levels
-~~~~~~~~~~~~~
-* P0: Critical path items
-* P1: Core functionality
-* P2: Enhancements
-* P3: Nice-to-have features
-
-Implementation Phases
--------------------
-
-Phase 1: Foundation
-~~~~~~~~~~~~~~~~~
-* [ ] Setup development environment
-* [ ] Create base agent classes
-* [ ] Implement core Swarm client
-* [ ] Establish testing framework
-
-Phase 2: Core Integration
-~~~~~~~~~~~~~~~~~~~~~~~
-* [ ] Implement specialized agents
-* [ ] Develop handoff mechanisms
-* [ ] Create evidence system integration
-* [ ] Build cognitive monitoring
-
-Phase 3: Enhancement
+Agent Initialization
 ~~~~~~~~~~~~~~~~~~
-* [ ] Add advanced features
-* [ ] Optimize performance
-* [ ] Enhance documentation
-* [ ] Create examples
+.. code-block:: python
 
-AI-Human Collaboration Model
-==========================
+   coordinator = SwarmCoordinator()
+   result = coordinator.start_decision_cycle(problem_statement)
 
-Roles and Responsibilities
-------------------------
+State Transitions
+~~~~~~~~~~~~~~~
+.. code-block:: python
 
-AI Agents
-~~~~~~~~
-* Problem analysis
-* Criteria evaluation
-* Alternative generation
-* Implementation monitoring
-* Cognitive state tracking
+   next_agent = coordinator.handle_agent_transition(result)
+   if next_agent:
+       # Continue with next agent
 
-Human Users
-~~~~~~~~~~
-* Final decision making
-* Context provision
-* Validation of suggestions
-* Quality assessment
+Cognitive Monitoring
+~~~~~~~~~~~~~~~~~
+.. code-block:: python
 
-Communication Protocols
----------------------
+   cognitive_check = coordinator.run_cognitive_check()
+   # Handle potential biases or issues
 
-Agent-Human Interface
-~~~~~~~~~~~~~~~~~~~
-* Clear status updates
-* Decision point notifications
-* Progress tracking
-* Error handling
+Development Roadmap
+=================
 
-Review Process
-~~~~~~~~~~~~
-* Regular validation points
-* Quality metrics tracking
-* Performance monitoring
-* User feedback collection
+Phase 1 (Current)
+--------------
+ Core agent implementation
+ Basic coordination layer
+ State management system
 
-Quality Assurance
----------------
+Phase 2 (Next)
+------------
+* Alternative generation agent
+* Implementation tracking
+* Evidence system integration
+* Extended cognitive monitoring
+
+Phase 3 (Future)
+-------------
+* Advanced bias detection
+* Multi-cycle learning
+* Performance optimization
+* Extended testing framework
 
 Testing Strategy
-~~~~~~~~~~~~~~
-* Unit tests for agents
-* Integration tests for workflows
-* Cognitive state validation
-* Performance benchmarks
+==============
 
-Monitoring
-~~~~~~~~~
-* Decision quality metrics
-* Agent performance tracking
-* User satisfaction metrics
-* System reliability measures
+Unit Tests
+---------
+* Agent behavior verification
+* State transition testing
+* Context management validation
+
+Integration Tests
+--------------
+* End-to-end decision cycles
+* Multi-agent coordination
+* State preservation checks
+
+Performance Tests
+--------------
+* Response time monitoring
+* Memory usage tracking
+* API call optimization
+
+Known Limitations
+===============
+* No persistent storage yet
+* Limited to synchronous operations
+* Basic cognitive monitoring
+* Simple evidence validation
 
 Next Steps
 =========
+1. Implement remaining agent types
+2. Add persistent storage layer
+3. Enhance cognitive monitoring
+4. Develop comprehensive tests
+5. Add async operation support
 
-.. _immediate-actions:
-
-Immediate Actions
----------------
-* [ ] Set up development environment
-* [ ] Create initial agent structure
-* [ ] Implement basic workflows
-* [ ] Establish testing framework
-
-Documentation Tasks
------------------
-* [ ] Create API documentation
-* [ ] Write integration guides
-* [ ] Develop example notebooks
-* [ ] Create user guides
-
-Review Points
------------
-* Weekly code reviews
-* Bi-weekly architecture reviews
-* Monthly progress assessments
-* Quarterly roadmap updates
+Dependencies
+===========
+* OpenAI Swarm (``pip install git+https://github.com/openai/swarm.git``)
+* Python 3.10+
+* Additional requirements in ``environment.yml``
