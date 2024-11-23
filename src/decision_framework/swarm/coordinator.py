@@ -5,15 +5,15 @@ This module handles the orchestration of different agents in the decision framew
 
 from typing import Dict, List, Optional, Any, Set, cast
 from dataclasses import dataclass
-from swarm import Swarm, Agent
+from swarm import Swarm, Agent  # type: ignore
 
-from .swarm_agents import (
+from .agents import (
     ProblemIdentifierAgent,
     CriteriaEvaluatorAgent,
     CognitiveMonitorAgent,
     Result
 )
-from .config import get_config
+from ..utils.config import get_config
 
 @dataclass
 class ModelConfig:
@@ -27,18 +27,17 @@ class ModelConfig:
     def to_dict(self) -> Dict[str, Any]:
         """Convert configuration to dictionary for agent initialization."""
         return {
-            "max_tokens": self.max_tokens,
-            "top_p": self.top_p,
-            "frequency_penalty": self.frequency_penalty,
-            "presence_penalty": self.presence_penalty
+            'name': self.name,
+            'max_tokens': self.max_tokens,
+            'top_p': self.top_p,
+            'frequency_penalty': self.frequency_penalty,
+            'presence_penalty': self.presence_penalty
         }
-
 
 class SwarmCoordinator:
     """Coordinates the network of agents in the decision framework."""
-    
-    # Available models and their configurations
-    AVAILABLE_MODELS = {
+
+    AVAILABLE_MODELS: Dict[str, ModelConfig] = {
         'gpt-4o-mini': ModelConfig(
             name='gpt-4o-mini',
             max_tokens=16384
@@ -52,14 +51,13 @@ class SwarmCoordinator:
             max_tokens=65536
         )
     }
-    
-    # Default models for each agent type
-    DEFAULT_AGENT_MODELS = {
+
+    DEFAULT_AGENT_MODELS: Dict[str, str] = {
         'problem_identifier': 'gpt-4o-mini',  # Fast model for initial analysis
         'criteria_evaluator': 'gpt-4o',       # More powerful model for complex evaluation
         'cognitive_monitor': 'o1-mini'        # Reasoning model for bias detection
     }
-    
+
     def __init__(self, agent_models: Optional[Dict[str, str]] = None):
         """
         Initialize the SwarmCoordinator.
@@ -72,18 +70,18 @@ class SwarmCoordinator:
             ValueError: If an invalid model is specified or if required agent type is missing.
         """
         config = get_config()
-        self.client = Swarm(api_key=config.openai_api_key)
-        self.config = config
+        self.client: Swarm = Swarm(api_key=config.openai_api_key)
+        self.config: Any = config
         
         # Validate and merge model configurations
-        models = self._validate_and_merge_models(agent_models or {})
+        models: Dict[str, str] = self._validate_and_merge_models(agent_models or {})
         
         # Initialize agents with their specific models
-        self.agents = self._initialize_agents(models)
-        self.current_agent = self.agents['problem_identifier']
+        self.agents: Dict[str, Agent] = self._initialize_agents(models)
+        self.current_agent: Agent = self.agents['problem_identifier']
         
         # Set up context variables
-        self.context_variables = {
+        self.context_variables: Dict[str, Any] = {
             'environment': config.environment,
             'enable_cognitive_monitoring': config.enable_cognitive_monitoring,
             'agent_models': models  # Store the actual model names

@@ -5,10 +5,10 @@ This module contains the core agent definitions and their specialized behaviors.
 
 from datetime import datetime
 from typing import Dict, List, Optional, Any, Callable
-from swarm import Agent
+from swarm import Agent  # type: ignore
 from dataclasses import dataclass, field
 
-from .problem_solving_cycle import (
+from ..core.problem import (
     ProblemCategory,
     DecisionCriteria,
     CriteriaCategory,

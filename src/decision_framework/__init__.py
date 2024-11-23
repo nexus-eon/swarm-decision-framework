@@ -5,7 +5,7 @@ This package provides a structured approach to complex decision-making processes
 incorporating cognitive tracking, evidence-based evaluation, and collaborative features.
 """
 
-from .problem_solving_cycle import (
+from .core.problem import (
     ProblemSolvingCycle,
     Alternative,
     DecisionCriteria,
