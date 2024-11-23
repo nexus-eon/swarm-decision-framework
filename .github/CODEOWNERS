@@ -1,0 +1,22 @@
+# These owners will be the default owners for everything in
+# the repo. Unless a later match takes precedence,
+# they will be requested for review when someone opens a pull request.
+*       @nexus-eon
+
+# Core framework code
+/src/decision_framework/core/    @nexus-eon
+
+# Swarm integration code
+/src/decision_framework/swarm/   @nexus-eon
+
+# Utility functions
+/src/decision_framework/utils/   @nexus-eon
+
+# Documentation
+/docs/   @nexus-eon
+*.md     @nexus-eon
+
+# Build and deployment configuration
+/.github/workflows/    @nexus-eon
+/requirements.txt     @nexus-eon
+/setup.py            @nexus-eon
